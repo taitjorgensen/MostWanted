@@ -7,6 +7,7 @@ function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
+      return searchByName(people);
     // TODO: search by name
     break;
     case 'no':
@@ -103,13 +104,14 @@ let displayOption;
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
-      if (firstName === person.firstName && lastName === person.lastName) {
-        personFound = person.firstName + person.lastName;
-        displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+      if (firstName === people.firstName && lastName === people.lastName) {
+        return personFound = people.firstName + people.lastName;
+        displayOption = prompt("Found " + people.firstName + " " + people.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
           if (displayOption === "info") {
             return displayPerson(person);
           }
       }
+      console.log(personFound);
   }
 
 // alerts a list of people
