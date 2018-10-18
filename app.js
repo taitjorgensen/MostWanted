@@ -111,7 +111,7 @@ function searchByName(people){
         return displayPerson(person);
       }
       else if (displayOption === 'family') {
-        return displayFamily(person);
+        return displayFamily(people);
       }
 
   }   
@@ -158,11 +158,10 @@ function chars(input){
   return true; // default validation only
 }
 
-function displayFamily(person) {
+function displayFamily(people) {
   person = people.filter(function(el){
     if (lastName === el.lastName && firstName !== firstName || el.id === el.currentSpouse || el.id === el.parents){
         return person.firstName + " " + person.lastName;   
     }
-    
   })
 }
