@@ -49,6 +49,7 @@ function searchByTraits(people) {
   let foundPerson = filteredPeople[0];
   mainMenu(foundPerson, people);
 }
+
 let displayOption;
 function searchByHeight(people) {
   let userInputHeight = prompt("How tall is the person in inches?");
@@ -139,6 +140,10 @@ function mainMenu(person, people){
     return mainMenu(person, people); // ask again
   }
 }
+//let firstName;
+//let lastName;
+
+
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
   let lastName = promptFor("What is the person's last name?", chars);
@@ -199,14 +204,16 @@ function chars(input){
 }
 
 function displayFamily(person, people) {
-  familySearch = people.filter(function(el){
-    if (person.lastName === el.lastName && person.firstName !== el.firstName || person.id === el.currentSpouse || person.id === el.parents[0]){  
+
+  //new function for below 
+  let lastNameMatch = people.filter(function(el){
+    if (person.lastName === el.lastName && person.firstName !== el.firstName){
       return true;   
     }
-    
-  })
-    for (i = 0; i < familySearch.length; i++) {
-      console.log(familySearch[i].firstName + " " + familySearch[i].lastName);
-}
+  });
+  let lastNameMatchArray = [];
+  for (i = 0; i < lastNameMatch.length; i++) {
+    lastNameMatchArray.push(lastNameMatch[i].firstName + " " + lastNameMatch[i].lastName);
+  } console.log(lastNameMatchArray);
+} 
 
-}
