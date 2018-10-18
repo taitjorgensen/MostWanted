@@ -97,18 +97,18 @@ function mainMenu(person, people){
     return mainMenu(person, people); // ask again
   }
 }
-
+let personFound;
 function searchByName(people){
-  var firstName = promptFor("What is the person's first name?", chars).toLowercase();
-  var lastName = promptFor("What is the person's last name?", chars).toLowercase();
-      let personFound = people.filter(function(el){
-        if(firstName === el.firstName && lastName === el.lastName){
-          return true;
-        }  
+  let firstName = promptFor("What is the person's first name?", chars);
+  let lastName = promptFor("What is the person's last name?", chars);
+      personFound = people.filter(function(el){
+        if (firstName === el.firstName && lastName === el.lastName){
+          return true;      
+        }
       });
       let displayOption = prompt("Found " + personFound[0].firstName + " " + personFound[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
       if (displayOption === "info") {
-        return displayPerson(person);
+        return displayPerson(personFound);
       }
 
   }   
@@ -120,12 +120,19 @@ function displayPeople(people){
   }).join("\n"));
 }
 
-function displayPerson(person){
+function displayPerson(personFound){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
-  var personInfo = "First Name: " + person.firstName + "\n";
-  personInfo += "Last Name: " + person.lastName + "\n";
-  // TODO: finish getting the rest of the information to display
+  var personInfo = "First Name: " + personFound[0].firstName + "\n";
+  personInfo += "Last Name: " + personFound[0].lastName + "\n";
+  personInfo += "Gender: " + personFound[0].gender + "\n";
+  personInfo += "Date of Birth: " + personFound[0].dob + "\n";
+  personInfo += "Height: " + personFound[0].height + "\n";
+  personInfo += "Weight: " + personFound[0].weight + "\n";
+  personInfo += "Eye Color: " + personFound[0].eyeColor + "\n";
+  personInfo += "Occupation: " + personFound[0].occupation + "\n";
+//  personInfo += "Parents: " + person.parents + "\n";
+//  personInfo += "Current Spouse: " + person.currentSpouse + "\n";
   alert(personInfo);
 }
 
