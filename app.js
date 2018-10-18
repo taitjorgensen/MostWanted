@@ -52,13 +52,14 @@ function searchByTraits(people) {
 let displayOption;
 function searchByHeight(people) {
   let userInputHeight = prompt("How tall is the person in inches?");
-  person = people.filter(function (el) {
+  person = people.filter(function (el) {    
     if (userInputHeight == el.height) {
       return true;     // return true if el.height matches userInputHeight
     }
     });
     return person;
 }
+
 function searchByWeight(people) {
   let userInputWeight = prompt("How much does the person weigh?");
   person = people.filter(function (el) {
@@ -69,18 +70,17 @@ function searchByWeight(people) {
     return person;
 }
 
-function searchEyeColor(people) {
+function searchByEyeColor(people) {
   let userInputEyeColor = prompt("What color eyes does the person have?");
-
   person = people.filter(function (el) {
     if (userInputEyeColor == el.eyeColor) {
-      return true;     // return true if el.gender matches userInputGender
+      return true;     // return true if el.eyeColor matches userInputEyeColor
     }
     });
     return person;
 }
 
-function searchGender(people) {
+function searchByGender(people) {
   let userInputGender = prompt("What gender is the person?");
 
   person = people.filter(function (el) {
@@ -152,7 +152,7 @@ function searchByName(people){
         return displayPerson(person[0]);
       }
       else if (displayOption === "family") {
-        return displayFamily(person[0], people);
+        return displayFamily(person, people);
       }
       else if (displayOption === "descendants") {
         return displayDescendants(person);
@@ -197,14 +197,16 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+
 function displayFamily(person, people) {
-  let foundPerson = people.filter(function(el){
-    if (person.lastName === el.lastName && person.firstName !== firstName || person.id === el.currentSpouse || person.id === el.parents[0]){
-        return true;   
+  familySearch = people.filter(function(el){
+    if (person.lastName === el.lastName && person.firstName !== el.firstName || person.id === el.currentSpouse || person.id === el.parents[0]){  
+      return true;   
     }
-    for (i = 0; i < foundPerson.length; i++) {
-        console.log(foundPerson);
-    }
+    
   })
+    for (i = 0; i < familySearch.length; i++) {
+      console.log(familySearch[i].firstName + " " + familySearch[i].lastName);
+}
 
 }
