@@ -55,6 +55,7 @@ function searchByTraits(people) {
   mainMenu(foundPerson, people);
 
 }
+let displayOption;
 
 function searchByHeight(people) {
   let userInputHeight = prompt("How tall is the person in inches?");
@@ -87,7 +88,7 @@ function mainMenu(person, people){
     alert("Could not find that individual.");
     return app(people); // restart
   }
-  let displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+  displayOption = prompt("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
   switch(displayOption){
     case "info":
       return displayPerson(person);
@@ -116,7 +117,7 @@ function searchByName(people){
           return true;      
         }
       });
-      let displayOption = prompt("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+      displayOption = prompt("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
       if (displayOption === "info") {
         return displayPerson(person);
       }
@@ -124,7 +125,7 @@ function searchByName(people){
         return displayFamily(person);
       }
       else if (displayOption === "descendants") {
-        return displayDescendants();
+        return displayDescendants(person);
       }
       else {
         return false;
