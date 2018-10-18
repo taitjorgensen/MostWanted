@@ -26,6 +26,7 @@ function searchByTraits(people) {
   switch(userSearchChoice) {
     case "height":
       filteredPeople = searchByHeight(people);
+      console.log(filteredPeople);
       break;
     case "weight":
       filteredPeople = searchByWeight(people);
@@ -55,17 +56,26 @@ function searchByTraits(people) {
 
 }
 
+function searchByHeight(people) {
+  let userInputHeight = prompt("How tall is the person in inches?");
+
+  person = people.filter(function (el) {
+    if (userInputHeight == el.height) {
+      return true;     // return true if el.height matches userInputHeight
+    }
+    });
+    return person;
+}
+
 function searchByWeight(people) {
   let userInputWeight = prompt("How much does the person weigh?");
 
-  let newArray = people.filter(function (el) {
-    if(el.weight == userInputWeight) {
-      return true;
+  person = people.filter(function (el) {
+    if (userInputWeight == el.weight) {
+      return true;     // return true if el.weight matches userInputWeight
     }
-    // return true if el.weight matches userInputHeight
-  });
-
-  return newArray;
+    });
+    
 }
 
 // Menu function to call once you find who you are looking for
@@ -77,10 +87,10 @@ function mainMenu(person, people){
     alert("Could not find that individual.");
     return app(people); // restart
   }
-
+  let displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
   switch(displayOption){
     case "info":
-    // TODO: get person's info
+      return displayPerson(person);
     break;
     case "family":
     // TODO: get person's family
@@ -109,6 +119,15 @@ function searchByName(people){
       let displayOption = prompt("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
       if (displayOption === "info") {
         return displayPerson(person);
+      }
+      else if (displayOption === "family") {
+        return displayFamily();
+      }
+      else if (displayOption === "descendants") {
+        return displayDescendants();
+      }
+      else {
+        return false;
       }
 
   }   
