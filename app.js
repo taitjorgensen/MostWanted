@@ -32,16 +32,16 @@ function searchByTraits(people) {
       filteredPeople = searchByWeight(people);
       break;
     case "eye color":
-      filteredPeople = searchByEyeCColor(people);
+      filteredPeople = searchByEyeColor(people);
       break;
     case "gender":
-      filterPeople = searchByGender(people);
+      filteredPeople = searchByGender(people);
       break;
     case "age":
-      filterPeople = searchByAge(people);
+      filteredPeople = searchByAge(people);
       break;
     case "occupation":
-      filterPeople = searchByOccupation(people);
+      filteredPeople = searchByOccupation(people);
       break;      
     // so on and so forth
     default:
@@ -76,7 +76,51 @@ function searchByWeight(people) {
       return true;     // return true if el.weight matches userInputWeight
     }
     });
-    
+    return person;
+}
+
+function searchEyeColor(people) {
+  let userInputEyeColor = prompt("What color eyes does the person have?");
+
+  person = people.filter(function (el) {
+    if (userInputEyeColor == el.eyeColor) {
+      return true;     // return true if el.gender matches userInputGender
+    }
+    });
+    return person;
+}
+
+function searchGender(people) {
+  let userInputGender = prompt("What gender is the person?");
+
+  person = people.filter(function (el) {
+    if (userInputGender == el.gender) {
+      return true;     // return true if el.gender matches userInputGender
+    }
+    });
+    return person;
+}
+
+function searchByAge(people) {
+  let userInputAge = prompt("What is the persons age?");
+
+  person = people.filter(function (el) {
+    if (userInputAge == el.age) {
+      return true;     // return true if el.age matches userInputAge
+    }
+    });
+    return person;
+}
+
+function searchByOccupation(people) {
+  let userInputOccupation = prompt("What is the persons occupation?");
+
+  person = people.filter(function (el) {
+    if (userInputOccupation == el.occupation) {
+      return true;     // return true if el.occupation matches userInputOccupation
+    }
+    });
+    return person;
 }
 
 // Menu function to call once you find who you are looking for
@@ -88,7 +132,7 @@ function mainMenu(person, people){
     alert("Could not find that individual.");
     return app(people); // restart
   }
-  displayOption = prompt("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+  displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
   switch(displayOption){
     case "info":
       return displayPerson(person);
@@ -119,7 +163,7 @@ function searchByName(people){
       });
       displayOption = prompt("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
       if (displayOption === "info") {
-        return displayPerson(person);
+        return displayPerson(person[0]);
       }
       else if (displayOption === "family") {
         return displayFamily(person);
@@ -143,14 +187,14 @@ function displayPeople(people){
 function displayPerson(person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
-  var personInfo = "First Name: " + person[0].firstName + "\n";
-  personInfo += "Last Name: " + person[0].lastName + "\n";
-  personInfo += "Gender: " + person[0].gender + "\n";
-  personInfo += "Date of Birth: " + person[0].dob + "\n";
-  personInfo += "Height: " + person[0].height + "\n";
-  personInfo += "Weight: " + person[0].weight + "\n";
-  personInfo += "Eye Color: " + person[0].eyeColor + "\n";
-  personInfo += "Occupation: " + person[0].occupation + "\n";
+  var personInfo = "First Name: " + person.firstName + "\n";
+  personInfo += "Last Name: " + person.lastName + "\n";
+  personInfo += "Gender: " + person.gender + "\n";
+  personInfo += "Date of Birth: " + person.dob + "\n";
+  personInfo += "Height: " + person.height + "\n";
+  personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "Eye Color: " + person.eyeColor + "\n";
+  personInfo += "Occupation: " + person.occupation + "\n";
 //  personInfo += "Parents: " + person.parents + "\n";
 //  personInfo += "Current Spouse: " + person.currentSpouse + "\n";
   alert(personInfo);
