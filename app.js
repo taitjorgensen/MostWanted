@@ -53,13 +53,19 @@ function searchByTraits(people) {
 let displayOption;
 function searchByHeight(people) {
   let userInputHeight = prompt("How tall is the person in inches?");
-  person = people.filter(function (el) {    
-    if (userInputHeight == el.height) {
-      return true;     // return true if el.height matches userInputHeight
+  let peopleWhoMatchGivenHeight = people.filter(function (el) {    
+     if (userInputHeight == el.height) {
+        return true;   // return true if el.height matches userInputHeight
     }
-    });
-    return person;
+    }); 
+    let matchingHeightArray = [];
+    for (i = 0; i < peopleWhoMatchGivenHeight.length; i++) {
+    matchingHeightArray.push(peopleWhoMatchGivenHeight[i].firstName + " " + peopleWhoMatchGivenHeight[i].lastName);
+    console.log(matchingHeightArray);
+    return peopleWhoMatchGivenHeight;
 }
+}
+
 
 function searchByWeight(people) {
   let userInputWeight = prompt("How much does the person weigh?");
