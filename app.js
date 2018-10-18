@@ -78,8 +78,6 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
-  var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
-
   switch(displayOption){
     case "info":
     // TODO: get person's info
@@ -99,14 +97,20 @@ function mainMenu(person, people){
     return mainMenu(person, people); // ask again
   }
 }
+let personFound;
+let displayOption;
 
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
-
-  // TODO: find the person using the name they entered
-
-}
+      if (firstName === person.firstName && lastName === person.lastName) {
+        personFound = person.firstName + person.lastName;
+        displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+          if (displayOption === "info") {
+            return displayPerson(person);
+          }
+      }
+  }
 
 // alerts a list of people
 function displayPeople(people){
