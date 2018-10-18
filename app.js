@@ -108,7 +108,7 @@ function searchByName(people){
         return displayPerson(person);
       }
       else if (displayOption === "family") {
-        return displayFamily(person);
+        return displayFamily(person[0], people);
       }
       else if (displayOption === "descendants") {
         return displayDescendants(person);
@@ -153,11 +153,14 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
-function displayFamily(person) {
-  person = people.filter(function(el){
-    if (lastName === el.lastName && firstName !== firstName || el.id === el.currentSpouse || el.id === el.parents){
-        return person.firstName + " " + person.lastName;   
+function displayFamily(person, people) {
+  let foundPerson = people.filter(function(el){
+    if (person.lastName === el.lastName && person.firstName !== firstName || person.id === el.currentSpouse || person.id === el.parents[0]){
+        return true;   
     }
-    
+    for (i = 0; i < foundPerson.length; i++) {
+        console.log(foundPerson);
+    }
   })
+
 }
