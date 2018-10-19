@@ -20,13 +20,10 @@ function app(people){
 function searchByTraits(people) {
   let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.");
   let filteredPeople;
+  let multiplePeopleResponse = "";
   switch(userSearchChoice) {
     case "height":
       filteredPeople = searchByHeight(people);
-      // if (filteredPeople[i] > 0) {
-      // alert("Multiple matches. Please choose from the list below and enter the name below:" + "\n" + filteredPeople[i].firstName +  " " + filteredPeople[i].lastName + "\n");
-      // }
-      console.log(filteredPeople);
       break;
     case "weight":
       filteredPeople = searchByWeight(people);
@@ -43,31 +40,33 @@ function searchByTraits(people) {
     case "occupation":
       filteredPeople = searchByOccupation(people);
       break;      
-    // so on and so forth
     default:
       alert("You entered an invalid search type! Please try again.");
       searchByTraits(people);
       break;
   }  
+  if (filteredPeople.length > 1) {
+    for (i = 0; filteredPeople.length > i; i++) {
+      multiplePeopleResponse += filteredPeople[i].firstName +  " " + filteredPeople[i].lastName + "\n"
+    }
+  alert("Multiple matches. Please choose from the list below and enter the name below: " + "\n" + multiplePeopleResponse + "\n");
+  app(people);
+  }
+  else {
   let foundPerson = filteredPeople[0];
   mainMenu(foundPerson, people);
+  }
 }
 
 let displayOption;
 function searchByHeight(people) {
   let userInputHeight = prompt("How tall is the person in inches?");
-  let peopleWhoMatchGivenHeight = people.filter(function (el) {    
+  let person = people.filter(function (el) {    
      if (userInputHeight == el.height) {
         return true;   // return true if el.height matches userInputHeight
     }
     }); 
-    let matchingHeightArray = [];
-    for (i = 0; i < peopleWhoMatchGivenHeight.length; i++) {
-    matchingHeightArray.push(peopleWhoMatchGivenHeight[i].firstName + " " + peopleWhoMatchGivenHeight[i].lastName);
-    }
-    console.log(matchingHeightArray);
-    return peopleWhoMatchGivenHeight;
-
+    return person;
 }
 
 
