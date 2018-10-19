@@ -109,24 +109,36 @@ function getAge(people) {
 //     }
 //     return peoplesDateOfBirth;
 //   }
-  let birthDate = new Date(people[i].dob);
-  let today = new Date();
-  let age = today.getFullYear() - birthDate.getFullYear();
-  let m = today.getMonth() - birthDate.getMonth();
-  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
-  }
+
+  let dobArray = people.map(function(el){
+    let dobSplit = el.dob.split("/");
+    let personMonth = dobSplit[0];
+    let personDay = dobSplit[1];
+    let personYear = dobSplit[2];
+
+    let birthDate = new Date(people[i].dob);
+    let today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    el.personAge = age;
+
+  });
 //   people[i].age = age;
   return age;
 }
 
+
 function searchByAge(people) {
-  getAge();
-  let userInputAge = prompt("What is the persons age?");
-  person = people.filter(function (el) {
-    if (userInputAge == el.age) {
+  // getAge();
+  // let userInputAge = prompt("What is the persons age?");
+  let person = people.map(function (el) {
+    // if (userInputAge == el.dob) {
       return true;     
-    }
+    // }
     });
     return person;
 }
@@ -153,7 +165,7 @@ function mainMenu(person, people){
       return displayPerson(person);
     break;
     case "family":
-      return displayFamily(person[0], people);
+      return displayFamily(person, people);
     break;
     case "descendants":
       return displayDescendants(person[0], people);
