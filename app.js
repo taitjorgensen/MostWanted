@@ -227,12 +227,17 @@ function displayFamily(person, people) {
 
 function displayDescendants(person, people) {
   let findChildren = people.filter(function(el){
-    if (person.id === el.parents[0] || person.id === el.parents[1]){
+    if (person.id === el.parents[0] || person.id === el.parents[1]) {
       return true;   
     }
   });
     let findChildrenArray = [];
-    for (i = 0; i < findChildren[i].length; i++){
+    for (i = 0; i < findChildren.length; i++){
       findChildrenArray.push(findChildren[i].firstName + " " + findChildren[i].lastName);
-    } console.log(findChildrenArray);
+    }   if (findChildrenArray === []) {
+            console.log(person.firstName + " " + person.lastName + " has no children.");
+        }
+        else if {
+        console.log(findChildrenArray);
+        }
 }
