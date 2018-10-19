@@ -157,10 +157,10 @@ function searchByName(people){
         return displayPerson(person[0]);
       }
       else if (displayOption === "family") {
-        return displayFamily(person, people);
+        return displayFamily(person[0], people);
       }
       else if (displayOption === "descendants") {
-        return displayDescendants(person);
+        return displayDescendants(person[0], people);
       }
       else {
         return false;
@@ -204,16 +204,25 @@ function chars(input){
 }
 
 function displayFamily(person, people) {
+    let lastNameMatch = people.filter(function(el){
+      if (person.lastName === el.lastName && person.firstName !== el.firstName || person.id === el.currentSpouse || person.id === el.parents[0] || person.id === el.parents[1]){
+        return true;   
+      }
+    });
+    let lastNameMatchArray = [];
+    for (i = 0; i < lastNameMatch.length; i++) {
+      lastNameMatchArray.push(lastNameMatch[i].firstName + " " + lastNameMatch[i].lastName);
+    } console.log(lastNameMatchArray);
+} 
 
-  //new function for below 
-  let lastNameMatch = people.filter(function(el){
-    if (person.lastName === el.lastName && person.firstName !== el.firstName){
+function displayDescendants(person, people) {
+  let findChildren = people.filter(function(el){
+    if (person.id === el.parents[0] || person.id === el.parents[1]){
       return true;   
     }
   });
-  let lastNameMatchArray = [];
-  for (i = 0; i < lastNameMatch.length; i++) {
-    lastNameMatchArray.push(lastNameMatch[i].firstName + " " + lastNameMatch[i].lastName);
-  } console.log(lastNameMatchArray);
-} 
-
+    let findChildrenArray = [];
+    for (i = 0; i < findChildren[i].length; i++){
+      findChildrenArray.push(findChildren[i].firstName + " " + findChildren[i].lastName);
+    } console.log(findChildrenArray);
+}
