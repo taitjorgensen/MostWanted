@@ -262,19 +262,8 @@ function displayDescendants(person, people) {
     }   if (findChildrenArray.length === 0) {
             console.log(person.firstName + " " + person.lastName + " has no children.");
         }
-      
-    // loop through findChildrenArray first, assign name back to person.id
+          //descendant loop
     for (i = 0; i < findChildrenArray.length; i++) {
-      let splitChildNameArray = findChildrenArray[i].split(" "); //i
-      let childFirstName = splitChildNameArray[0];
-      let childLastName = splitChildNameArray[1];
-
-      person = people.filter(function(el){
-        if (childFirstName === el.firstName && childLastName === el.lastName){
-          return true;      
-        }
-      });
-    }   
-        let descendantArray = findChildrenArray.concat(displayDescendants(person[0], people));
-        console.log(descendantArray);
-  }   
+        return findChildrenArray.concat(displayDescendants(findChildrenArray[i], people));
+      }  console.log(findChildrenArray); 
+  }      
