@@ -23,6 +23,9 @@ function searchByTraits(people) {
   switch(userSearchChoice) {
     case "height":
       filteredPeople = searchByHeight(people);
+      // if (filteredPeople[i] > 0) {
+      // alert("Multiple matches. Please choose from the list below and enter the name below:" + "\n" + filteredPeople[i].firstName +  " " + filteredPeople[i].lastName + "\n");
+      // }
       console.log(filteredPeople);
       break;
     case "weight":
@@ -61,9 +64,10 @@ function searchByHeight(people) {
     let matchingHeightArray = [];
     for (i = 0; i < peopleWhoMatchGivenHeight.length; i++) {
     matchingHeightArray.push(peopleWhoMatchGivenHeight[i].firstName + " " + peopleWhoMatchGivenHeight[i].lastName);
+    }
     console.log(matchingHeightArray);
     return peopleWhoMatchGivenHeight;
-}
+
 }
 
 
@@ -132,10 +136,10 @@ function mainMenu(person, people){
       return displayPerson(person);
     break;
     case "family":
-    // TODO: get person's family
+      return displayFamily(person[0], people);
     break;
     case "descendants":
-    // TODO: get person's descendants
+      return displayDescendants(person[0], people);
     break;
     case "restart":
     app(people); // restart
@@ -163,10 +167,10 @@ function searchByName(people){
         return displayPerson(person[0]);
       }
       else if (displayOption === "family") {
-        return displayFamily(person, people);
+        return displayFamily(person[0], people);
       }
       else if (displayOption === "descendants") {
-        return displayDescendants(person);
+        return displayDescendants(person[0], people);
       }
       else {
         return false;
