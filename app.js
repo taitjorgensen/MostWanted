@@ -111,34 +111,33 @@ function getAge(people) {
 //   }
 
   let dobArray = people.map(function(el){
-    let dobSplit = el.dob.split("/");
-    let personMonth = dobSplit[0];
-    let personDay = dobSplit[1];
-    let personYear = dobSplit[2];
-
-    let birthDate = new Date(people[i].dob);
+    
+    // let dobSplit = el.dob.split("/");
+    // let personMonth = dobSplit[0];
+    // let personDay = dobSplit[1];
+    // let personYear = dobSplit[2];
+    
+  });
+  
+    let birthDate = new Date(dobArray);
     let today = new Date();
     let age = today.getFullYear() - birthDate.getFullYear();
     let m = today.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
         age--;
     }
-
-    el.personAge = age;
-
-  });
-//   people[i].age = age;
+  el.personAge = age;
   return age;
 }
 
 
 function searchByAge(people) {
-  // getAge();
-  // let userInputAge = prompt("What is the persons age?");
-  let person = people.map(function (el) {
-    // if (userInputAge == el.dob) {
+  getAge(people);
+  let userInputAge = prompt("What is the persons age?");
+  person = people.filter(function (el) {
+    if (userInputAge == el.age) {
       return true;     
-    // }
+    }
     });
     return person;
 }
