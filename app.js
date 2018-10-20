@@ -3,6 +3,7 @@ Build all of your functions for displaying and gathering information below (GUI)
 */
 // app is the function called to start the entire application
 function app(people){
+  getAge(people);
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
@@ -109,30 +110,32 @@ function getAge(people) {
 //     }
 //     return peoplesDateOfBirth;
 //   }
-
-  let dobArray = people.map(function(el){
+  
+  let dobArray = people.map(function (el) {
     
+    return el.dob;
     // let dobSplit = el.dob.split("/");
     // let personMonth = dobSplit[0];
     // let personDay = dobSplit[1];
     // let personYear = dobSplit[2];
     
   });
-  
-    let birthDate = new Date(dobArray);
-    let today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    let m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
-  el.personAge = age;
-  return age;
+    for (i = 0; i < dobArray.length; i++) {
+      let birthDate = new Date(dobArray[i]);
+      let today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      let m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+      }
+    people.personAge = age;
+    return age;
+}
 }
 
 
 function searchByAge(people) {
-  getAge(people);
+  // getAge(people);
   let userInputAge = prompt("What is the persons age?");
   person = people.filter(function (el) {
     if (userInputAge == el.age) {
@@ -218,8 +221,9 @@ function displayPerson(person){
   personInfo += "Weight: " + person.weight + "\n";
   personInfo += "Eye Color: " + person.eyeColor + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";
-//  personInfo += "Parents: " + person.parents + "\n";
-//  personInfo += "Current Spouse: " + person.currentSpouse + "\n";
+  personInfo += "Parents: " + person.parents + "\n";
+  personInfo += "Current Spouse: " + person.currentSpouse + "\n";
+  personInfo += "Age:" + person.personAge + "\n";
   alert(personInfo);
 }
 // function that prompts and validates user input
