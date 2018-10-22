@@ -49,7 +49,7 @@ function searchByTraits(people) {
   }
     let additionalTraitSearch = promptFor("Would you like to search by additional traits? Enter 'yes' or 'no'", yesNo).toLowerCase();
     if(additionalTraitSearch === "yes") {
-        filteredPeople = searchByTraits(people);
+        filteredPeople = searchByTraits(filteredPeople);
         return filteredPeople;
     }
     if (filteredPeople.length > 1) {
@@ -218,7 +218,8 @@ function displayPerson(person){
   personInfo += "Occupation: " + person.occupation + "\n";
   personInfo += "Parents: " + person.parents + "\n";
   personInfo += "Current Spouse: " + person.currentSpouse + "\n";
-  alert(personInfo);
+  console.log(personInfo);
+  return personInfo;
 }
 // function that prompts and validates user input
 function promptFor(question, callback){
