@@ -163,13 +163,15 @@ function mainMenu(person, people){
   let findChildrenArray = [];
   switch(displayOption){
     case "info":
-      displayPerson(person);
+    document.getElementById("personInfo").innerHTML = displayPerson(person);
     break;
     case "family":
-      displayFamily(person, people);
+    displayFamily(person, people);
+    document.getElementById("personInfo").innerHTML = "For client privacy <br> Please see console log";
     break;
     case "descendants":
-      displayDescendants(person, people, findChildrenArray);
+    displayDescendants(person, people, findChildrenArray);
+    document.getElementById("personInfo").innerHTML = "For client privacy <br> Please see console log";
       if(findChildrenArray.length === 0)
       {
         alert("No descendants found.");
@@ -187,11 +189,11 @@ function mainMenu(person, people){
     return mainMenu(person, people);
   }
 }
-
-function searchByName(people){
-  let firstName = promptFor("What is the person's first name?", chars).toLowerCase();
+// firstName and lastName vaildation by establishing name Arrays
+function searchByName(people){  
+  let firstName = promptFor("What is the person's first name?", chars).toLowerCase(); 
   let lastName = promptFor("What is the person's last name?", chars).toLowerCase();
-        let person = people.filter(function(el){
+        person = people.filter(function(el){
         if (firstName === el.firstName.toLowerCase() && lastName === el.lastName.toLowerCase()){
           return true;      
         }
@@ -207,18 +209,18 @@ function displayPeople(people){
 function displayPerson(person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
-  let personInfo = "First Name: " + person.firstName + "\n";
-  personInfo += "Last Name: " + person.lastName + "\n";
-  personInfo += "Gender: " + person.gender + "\n";
-  personInfo += "Date of Birth: " + person.dob + "\n";
-  personInfo += "Age: " + person.age + "\n";
-  personInfo += "Height: " + person.height + "\n";
-  personInfo += "Weight: " + person.weight + "\n";
-  personInfo += "Eye Color: " + person.eyeColor + "\n";
-  personInfo += "Occupation: " + person.occupation + "\n";
-  personInfo += "Parents: " + person.parents + "\n";
-  personInfo += "Current Spouse: " + person.currentSpouse + "\n";
-  console.log(personInfo);
+  let personInfo = "First Name: " + person.firstName + "<br>";
+  personInfo += "Last Name: " + person.lastName + "<br>";
+  personInfo += "Gender: " + person.gender + "<br>";
+  personInfo += "Date of Birth: " + person.dob + "<br>";
+  personInfo += "Age: " + person.age + "<br>";
+  personInfo += "Height: " + person.height + "<br>";
+  personInfo += "Weight: " + person.weight + "<br>";
+  personInfo += "Eye Color: " + person.eyeColor + "<br>";
+  personInfo += "Occupation: " + person.occupation + "<br>";
+  personInfo += "Parents: " + person.parents + "<br>";
+  personInfo += "Current Spouse: " + person.currentSpouse + "<br>";
+  // console.log(personInfo);
   return personInfo;
 }
 // function that prompts and validates user input
