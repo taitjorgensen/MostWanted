@@ -3,7 +3,6 @@ Build all of your functions for displaying and gathering information below (GUI)
 */
 // app is the function called to start the entire application
 function app(people){
-  getAge(people);
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
@@ -101,41 +100,33 @@ function searchByGender(people) {
     return person;
 }
 
-function getAge(people) {
-  
-//   let peoplesDateOfBirth = [];
-//   if (people.length > 0) {
-//     for (i = 0; people.length > i; i++) {
-//       peoplesDateOfBirth.push(people[i].firstName + " " + people[i].lastName + " " + people[i].dob)
-//     }
-//     return peoplesDateOfBirth;
-//   }
-  
-  let dobArray = people.map(function (el) {
-    
+function getDateOfBirth(people) {    
+  let dobArray = people.map(function (el) {  
     return el.dob;
-    // let dobSplit = el.dob.split("/");
-    // let personMonth = dobSplit[0];
-    // let personDay = dobSplit[1];
-    // let personYear = dobSplit[2];
-    
   });
+  determineAge(dobArray, people);
+}
+
+  function determineAge(dobArray, people) {
+    let today = new Date();
+    //let ageArray;
     for (i = 0; i < dobArray.length; i++) {
       let birthDate = new Date(dobArray[i]);
-      let today = new Date();
       let age = today.getFullYear() - birthDate.getFullYear();
       let m = today.getMonth() - birthDate.getMonth();
       if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
           age--;
       }
-    people.personAge = age;
-    return age;
-}
-}
+      people[i].age = age;
+      }
+      //for(let i = 0; i<  people.length; i++){
+        //people[i].age = ageArray[i];
+      //}
 
+  }
 
 function searchByAge(people) {
-  // getAge(people);
+  getDateOfBirth(people);
   let userInputAge = prompt("What is the persons age?");
   person = people.filter(function (el) {
     if (userInputAge == el.age) {
@@ -154,7 +145,7 @@ function searchByOccupation(people) {
     });
     return person;
 }
-// Menu function to call once you find who you are looking for
+
 function mainMenu(person, people){
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
   if(!person){
@@ -217,13 +208,13 @@ function displayPerson(person){
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Gender: " + person.gender + "\n";
   personInfo += "Date of Birth: " + person.dob + "\n";
+  personInfo += "Age: " + person.age + "\n";
   personInfo += "Height: " + person.height + "\n";
   personInfo += "Weight: " + person.weight + "\n";
   personInfo += "Eye Color: " + person.eyeColor + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";
   personInfo += "Parents: " + person.parents + "\n";
   personInfo += "Current Spouse: " + person.currentSpouse + "\n";
-  personInfo += "Age:" + person.personAge + "\n";
   alert(personInfo);
 }
 // function that prompts and validates user input
