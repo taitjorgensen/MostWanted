@@ -1,7 +1,4 @@
-/*
-Build all of your functions for displaying and gathering information below (GUI).
-*/
-// app is the function called to start the entire application
+
 function app(people){
   getDateOfBirth(people);
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
@@ -14,7 +11,7 @@ function app(people){
     break;
     default:
     alert("Wrong! Please try again, following the instructions dummy. :)");
-    app(people); // restart app
+    app(people);
     break;
     }
 }
@@ -115,7 +112,6 @@ function getDateOfBirth(people) {
 
   function determineAge(dobArray, people) {
     let today = new Date();
-    //let ageArray;
     for (i = 0; i < dobArray.length; i++) {
       let birthDate = new Date(dobArray[i]);
       let age = today.getFullYear() - birthDate.getFullYear();
@@ -125,14 +121,9 @@ function getDateOfBirth(people) {
       }
       people[i].age = age;
       }
-      //for(let i = 0; i<  people.length; i++){
-        //people[i].age = ageArray[i];
-      //}
-
   }
 
 function searchByAge(people) {
-
   let userInputAge = prompt("What is the persons age?");
   person = people.filter(function (el) {
     if (userInputAge == el.age) {
@@ -154,7 +145,6 @@ function searchByOccupation(people) {
 
 let displayOption;
 function mainMenu(person, people){
-  /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
   if(!person){
     alert("Could not find that individual.");
     return app(people);
@@ -189,26 +179,35 @@ function mainMenu(person, people){
     return mainMenu(person, people);
   }
 }
-// firstName and lastName vaildation by establishing name Arrays
-function searchByName(people){  
-  let firstName = promptFor("What is the person's first name?", chars).toLowerCase(); 
+
+function searchByName(people){
+  let firstName = promptFor("What is the person's first name?", chars).toLowerCase();
+      let firstNameEsists = people.filter(function(el){
+        if (firstName === el.firstName.toLowerCase()){
+          return true;      
+        }
+      });
+        if (firstNameEsists.length === 0) {
+          alert("First name not found. Please type carefully and try again.");
+          return searchByName(people);
+        }
   let lastName = promptFor("What is the person's last name?", chars).toLowerCase();
         person = people.filter(function(el){
         if (firstName === el.firstName.toLowerCase() && lastName === el.lastName.toLowerCase()){
           return true;      
         }
       });
+        
      mainMenu(person[0], people);
   }   
-// alerts a list of people
+
 function displayPeople(people){
   alert(people.map(function(person){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
 function displayPerson(person){
-  // print all of the information about a person:
-  // height, weight, age, name, occupation, eye color.
+
   let personInfo = "First Name: " + person.firstName + "<br>";
   personInfo += "Last Name: " + person.lastName + "<br>";
   personInfo += "Gender: " + person.gender + "<br>";
@@ -220,23 +219,22 @@ function displayPerson(person){
   personInfo += "Occupation: " + person.occupation + "<br>";
   personInfo += "Parents: " + person.parents + "<br>";
   personInfo += "Current Spouse: " + person.currentSpouse + "<br>";
-  // console.log(personInfo);
   return personInfo;
 }
-// function that prompts and validates user input
+
 function promptFor(question, callback){
   do{
     var response = prompt(question).trim();
   } while(!response || !callback(response));
   return response;
 }
-// helper function to pass into promptFor to validate yes/no answers
+
 function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
-// helper function to pass in as default promptFor validation
+
 function chars(input){
-  return true; // default validation only
+  return true;
 }
 
 function displayFamily(person, people) {
@@ -253,7 +251,7 @@ function displayFamily(person, people) {
 function displayDescendants(person, people, findChildrenArray) {
 
     for(let i = 0; i < people.length; i++) {
-      if(person.id === people[i].parents[0] || person.id === people[i].parents[1]) { //people[i] ?
+      if(person.id === people[i].parents[0] || person.id === people[i].parents[1]) {
         findChildrenArray.push(people[i]);
         displayDescendants(people[i], people, findChildrenArray);
       }
