@@ -153,15 +153,21 @@ function mainMenu(person, people){
     return app(people);
   }
   displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+  let findChildrenArray = [];
   switch(displayOption){
     case "info":
-      return displayPerson(person);
+      displayPerson(person);
     break;
     case "family":
-      return displayFamily(person, people);
+      displayFamily(person, people);
     break;
     case "descendants":
-      return displayDescendants(person[0], people);
+      displayDescendants(person, people, findChildrenArray);
+      if(findChildrenArray.length === 0)
+      {
+        alert("No descendants found.");
+      }
+        console.log(findChildrenArray);
     break;
     case "restart":
     app(people);
@@ -176,24 +182,12 @@ function mainMenu(person, people){
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
   let lastName = promptFor("What is the person's last name?", chars);
-      person = people.filter(function(el){
+      let person = people.filter(function(el){
         if (firstName === el.firstName && lastName === el.lastName){
           return true;      
         }
       });
-      displayOption = prompt("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
-      if (displayOption === "info") {
-        return displayPerson(person[0]);
-      }
-      else if (displayOption === "family") {
-        return displayFamily(person[0], people);
-      }
-      else if (displayOption === "descendants") {
-        return displayDescendants(person[0], people);
-      }
-      else {
-        return false;
-      }
+     mainMenu(person[0], people);
   }   
 // alerts a list of people
 function displayPeople(people){
@@ -245,27 +239,15 @@ function displayFamily(person, people) {
     } console.log(lastNameMatchArray);
 } 
 
-function displayDescendants(person, people) {
-  let findChildren = people.filter(function(el){
-    if (person.id === el.parents[0] || person.id === el.parents[1]) {
-      return true;   
+function displayDescendants(person, people, findChildrenArray) {
+
+    for(let i = 0; i < people.length; i++) {
+      if(person.id === people[i].parents[0] || person.id === people[i].parents[1]) { //people[i] ?
+        findChildrenArray.push(people[i]);
+        displayDescendants(people[i], people, findChildrenArray);
+      }
     }
-  });
-    let findChildrenArray = [];
-    for (i = 0; i < findChildren.length; i++){
-      findChildrenArray.push(findChildren[i].firstName + " " + findChildren[i].lastName);
-    }   if (findChildrenArray.length === 0) {
-            console.log(person.firstName + " " + person.lastName + " has no children.");
-        }
-        else {
-          let findGrandChildrenArray = [];
-          for (i = 0; i < findChildrenArray.length; i++) {
-                findGrandChildrenArray.push(displayDescendants(findChildrenArray[i], people));
-                return findGrandChildrenArray;
-            }
-        }
-        console.log(findChildrenArray.concat(findGrandChildrenArray));
-  }          
+}
 
 
 
