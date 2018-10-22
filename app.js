@@ -3,6 +3,7 @@ Build all of your functions for displaying and gathering information below (GUI)
 */
 // app is the function called to start the entire application
 function app(people){
+  getDateOfBirth(people);
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
@@ -15,8 +16,9 @@ function app(people){
     alert("Wrong! Please try again, following the instructions dummy. :)");
     app(people); // restart app
     break;
-  }
+    }
 }
+
 function searchByTraits(people) {
   let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.");
   let filteredPeople;
@@ -44,8 +46,13 @@ function searchByTraits(people) {
       alert("You entered an invalid search type! Please try again.");
       searchByTraits(people);
       break;
-  }  
-  if (filteredPeople.length > 1) {
+  }
+    let additionalTraitSearch = promptFor("Would you like to search by additional traits? Enter 'yes' or 'no'", yesNo).toLowerCase();
+    if(additionalTraitSearch === "yes") {
+        filteredPeople = searchByTraits(people);
+        return filteredPeople;
+    }
+    if (filteredPeople.length > 1) {
     for (i = 0; filteredPeople.length > i; i++) {
       multiplePeopleMatchList += filteredPeople[i].firstName +  " " + filteredPeople[i].lastName + "\n"
     }
@@ -56,9 +63,9 @@ function searchByTraits(people) {
   let foundPerson = filteredPeople[0];
   mainMenu(foundPerson, people);
   }
+
 }
 
-let displayOption;
 function searchByHeight(people) {
   let userInputHeight = prompt("How tall is the person in inches?");
   let person = people.filter(function (el) {    
@@ -68,7 +75,6 @@ function searchByHeight(people) {
     }); 
     return person;
 }
-
 
 function searchByWeight(people) {
   let userInputWeight = prompt("How much does the person weigh?");
@@ -126,7 +132,7 @@ function getDateOfBirth(people) {
   }
 
 function searchByAge(people) {
-  getDateOfBirth(people);
+
   let userInputAge = prompt("What is the persons age?");
   person = people.filter(function (el) {
     if (userInputAge == el.age) {
@@ -146,6 +152,7 @@ function searchByOccupation(people) {
     return person;
 }
 
+let displayOption;
 function mainMenu(person, people){
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
   if(!person){
