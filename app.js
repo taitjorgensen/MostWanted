@@ -20,7 +20,7 @@ function app(people){
 }
 
 function searchByTraits(people) {
-  let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.");
+  let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.").toLowerCase();
   let filteredPeople;
   let multiplePeopleMatchList = "";
   switch(userSearchChoice) {
@@ -87,7 +87,7 @@ function searchByWeight(people) {
 }
 
 function searchByEyeColor(people) {
-  let userInputEyeColor = prompt("What color eyes does the person have?");
+  let userInputEyeColor = prompt("What color eyes does the person have?").toLowerCase();
   person = people.filter(function (el) {
     if (userInputEyeColor == el.eyeColor) {
       return true;
@@ -97,7 +97,7 @@ function searchByEyeColor(people) {
 }
 
 function searchByGender(people) {
-  let userInputGender = prompt("What gender is the person?");
+  let userInputGender = prompt("What gender is the person?").toLowerCase();
   person = people.filter(function (el) {
     if (userInputGender == el.gender) {
       return true; 
@@ -143,7 +143,7 @@ function searchByAge(people) {
 }
 
 function searchByOccupation(people) {
-  let userInputOccupation = prompt("What is the persons occupation?");
+  let userInputOccupation = prompt("What is the persons occupation?").toLowerCase();
   person = people.filter(function (el) {
     if (userInputOccupation == el.occupation) {
       return true;   
@@ -159,7 +159,7 @@ function mainMenu(person, people){
     alert("Could not find that individual.");
     return app(people);
   }
-  displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+  displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'").toLowerCase();
   let findChildrenArray = [];
   switch(displayOption){
     case "info":
@@ -189,10 +189,10 @@ function mainMenu(person, people){
 }
 
 function searchByName(people){
-  let firstName = promptFor("What is the person's first name?", chars);
-  let lastName = promptFor("What is the person's last name?", chars);
-      let person = people.filter(function(el){
-        if (firstName === el.firstName && lastName === el.lastName){
+  let firstName = promptFor("What is the person's first name?", chars).toLowerCase();
+  let lastName = promptFor("What is the person's last name?", chars).toLowerCase();
+        let person = people.filter(function(el){
+        if (firstName === el.firstName.toLowerCase() && lastName === el.lastName.toLowerCase()){
           return true;      
         }
       });
