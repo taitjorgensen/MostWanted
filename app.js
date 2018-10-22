@@ -49,18 +49,17 @@ function searchByTraits(people) {
         filteredPeople = searchByTraits(filteredPeople);
         return filteredPeople;
     }
-    if (filteredPeople.length > 1) {
-    for (i = 0; filteredPeople.length > i; i++) {
-      multiplePeopleMatchList += filteredPeople[i].firstName +  " " + filteredPeople[i].lastName + "\n"
-    }
-  alert("Multiple matches. Please choose from the list below and enter the name below: " + "\n" + multiplePeopleMatchList + "\n");
-  app(people);
-  }
-  else {
-  let foundPerson = filteredPeople[0];
-  mainMenu(foundPerson, people);
-  }
-
+          if (filteredPeople.length > 1) {
+            for (i = 0; filteredPeople.length > i; i++) {
+              multiplePeopleMatchList += filteredPeople[i].firstName +  " " + filteredPeople[i].lastName + "\n"
+            }
+            alert("Multiple matches. Please choose from the list below and enter the name below: " + "\n" + multiplePeopleMatchList + "\n");
+            app(people);
+          }
+          else {
+              let foundPerson = filteredPeople[0];
+              mainMenu(foundPerson, people);
+          }
 }
 
 function searchByHeight(people) {
