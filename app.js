@@ -263,8 +263,16 @@ function displayDescendants(person, people) {
     }   if (findChildrenArray.length === 0) {
             console.log(person.firstName + " " + person.lastName + " has no children.");
         }
-          //descendant loop
-    for (i = 0; i < findChildrenArray.length; i++) {
-        return findChildrenArray.concat(displayDescendants(findChildrenArray[i], people));
-      }  console.log(findChildrenArray); 
-  }      
+        else {
+          let findGrandChildrenArray = [];
+          for (i = 0; i < findChildrenArray.length; i++) {
+                findGrandChildrenArray.push(displayDescendants(findChildrenArray[i], people));
+                return findGrandChildrenArray;
+            }
+        }
+        console.log(findChildrenArray.concat(findGrandChildrenArray));
+  }          
+
+
+
+
