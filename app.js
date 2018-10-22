@@ -190,12 +190,22 @@ function mainMenu(person, people){
 
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars).toLowerCase();
+      let firstNameEsists = people.filter(function(el){
+        if (firstName === el.firstName.toLowerCase()){
+          return true;      
+        }
+      });
+        if (firstNameEsists.length === 0) {
+          alert("First name not found. Please type carefully and try again.");
+          return searchByName(people);
+        }
   let lastName = promptFor("What is the person's last name?", chars).toLowerCase();
         let person = people.filter(function(el){
         if (firstName === el.firstName.toLowerCase() && lastName === el.lastName.toLowerCase()){
           return true;      
         }
       });
+        
      mainMenu(person[0], people);
   }   
 // alerts a list of people
