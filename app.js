@@ -216,7 +216,8 @@ function displayPerson(person){
   personInfo += "Occupation: " + person.occupation + "\n";
   personInfo += "Parents: " + person.parents + "\n";
   personInfo += "Current Spouse: " + person.currentSpouse + "\n";
-  alert(personInfo);
+  console.log(personInfo);
+  return personInfo;
 }
 // function that prompts and validates user input
 function promptFor(question, callback){
