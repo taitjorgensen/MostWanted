@@ -100,45 +100,38 @@ function searchByGender(people) {
     return person;
 }
 
-function getAge(people) {
-  
-//   let peoplesDateOfBirth = [];
-//   if (people.length > 0) {
-//     for (i = 0; people.length > i; i++) {
-//       peoplesDateOfBirth.push(people[i].firstName + " " + people[i].lastName + " " + people[i].dob)
-//     }
-//     return peoplesDateOfBirth;
-//   }
-
-  let dobArray = people.map(function(el){
-    let dobSplit = el.dob.split("/");
-    let personMonth = dobSplit[0];
-    let personDay = dobSplit[1];
-    let personYear = dobSplit[2];
-
-    let birthDate = new Date(people[i].dob);
-    let today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    let m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
-
-    el.personAge = age;
-
+function getDateOfBirth(people) {    
+  let dobArray = people.map(function (el) {  
+    return el.dob;
   });
-//   people[i].age = age;
-  return age;
+  determineAge(dobArray, people);
 }
 
+  function determineAge(dobArray, people) {
+    let today = new Date();
+    //let ageArray;
+    for (i = 0; i < dobArray.length; i++) {
+      let birthDate = new Date(dobArray[i]);
+      let age = today.getFullYear() - birthDate.getFullYear();
+      let m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+      }
+      people[i].age = age;
+      }
+      //for(let i = 0; i<  people.length; i++){
+        //people[i].age = ageArray[i];
+      //}
+
+  }
 
 function searchByAge(people) {
-  // getAge();
-  // let userInputAge = prompt("What is the persons age?");
-  let person = people.map(function (el) {
-    // if (userInputAge == el.dob) {
+  getDateOfBirth(people);
+  let userInputAge = prompt("What is the persons age?");
+  person = people.filter(function (el) {
+    if (userInputAge == el.age) {
       return true;     
-    // }
+    }
     });
     return person;
 }
@@ -152,7 +145,7 @@ function searchByOccupation(people) {
     });
     return person;
 }
-// Menu function to call once you find who you are looking for
+
 function mainMenu(person, people){
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
   if(!person){
@@ -215,12 +208,13 @@ function displayPerson(person){
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Gender: " + person.gender + "\n";
   personInfo += "Date of Birth: " + person.dob + "\n";
+  personInfo += "Age: " + person.age + "\n";
   personInfo += "Height: " + person.height + "\n";
   personInfo += "Weight: " + person.weight + "\n";
   personInfo += "Eye Color: " + person.eyeColor + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";
-//  personInfo += "Parents: " + person.parents + "\n";
-//  personInfo += "Current Spouse: " + person.currentSpouse + "\n";
+  personInfo += "Parents: " + person.parents + "\n";
+  personInfo += "Current Spouse: " + person.currentSpouse + "\n";
   alert(personInfo);
 }
 // function that prompts and validates user input
