@@ -29,6 +29,16 @@
           <div class="col-sm-4">
                 <center>
                   <button onclick="app(data)" class="btn btn-primary btn-lg">Start Search</button>
+                  <br>
+                  <br>
+                  <h4>Display Results:</h4>
+                  <br>
+                  <p id="demo"></p>
+                  <script>
+                      function app(data) { 
+                        document.getElementById("demo").innerHTML = displayPerson(person);
+                      }
+                  </script>
                 </center>
           </div>
           <div class="col-sm-4">

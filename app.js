@@ -49,7 +49,7 @@ function searchByTraits(people) {
   }
     let additionalTraitSearch = promptFor("Would you like to search by additional traits? Enter 'yes' or 'no'", yesNo).toLowerCase();
     if(additionalTraitSearch === "yes") {
-        filteredPeople = searchByTraits(people);
+        filteredPeople = searchByTraits(filteredPeople);
         return filteredPeople;
     }
     if (filteredPeople.length > 1) {
