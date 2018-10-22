@@ -174,7 +174,9 @@ function mainMenu(person, people){
       {
         alert("No descendants found.");
       }
-        console.log(findChildrenArray);
+        for (j = 0; j < findChildrenArray.length; j++) {
+          console.log(findChildrenArray[j].firstName + " " + findChildrenArray[j].lastName);
+        }  
     break;
     case "restart":
     app(people);
@@ -235,15 +237,14 @@ function chars(input){
 }
 
 function displayFamily(person, people) {
-    let lastNameMatch = people.filter(function(el){
+    let familyMatch = people.filter(function(el){
       if (person.lastName === el.lastName && person.firstName !== el.firstName || person.id === el.currentSpouse || person.id === el.parents[0] || person.id === el.parents[1]){
         return true;   
       }
     });
-    let lastNameMatchArray = [];
-    for (i = 0; i < lastNameMatch.length; i++) {
-      lastNameMatchArray.push(lastNameMatch[i].firstName + " " + lastNameMatch[i].lastName);
-    } console.log(lastNameMatchArray);
+    for (i = 0; i < familyMatch.length; i++) {
+      console.log(familyMatch[i].firstName + " " + familyMatch[i].lastName);
+    }
 } 
 
 function displayDescendants(person, people, findChildrenArray) {
