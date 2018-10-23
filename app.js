@@ -58,8 +58,8 @@ function searchByTraits(people) {
           }
           else {
               let foundPerson = filteredPeople[0];
-              mainMenu(foundPerson, people);
-          }
+              mainMenu(foundPerson, data);
+          } 
 }
 
 function searchByHeight(people) {
@@ -109,8 +109,8 @@ function getDateOfBirth(people) {
   determineAge(dobArray, people);
 }
 
-  function determineAge(dobArray, people) {
-    let today = new Date();
+function determineAge(dobArray, people) {
+  let today = new Date();
     for (i = 0; i < dobArray.length; i++) {
       let birthDate = new Date(dobArray[i]);
       let age = today.getFullYear() - birthDate.getFullYear();
